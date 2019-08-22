@@ -111,8 +111,12 @@ func bar(args ...int) {
 }
 
 //指针
-// *号表示接受参数的地址
+// *号表示接受参数的指针
+/**
+Go 语言中 channel，slice，map 这三种类型的实现机制类似指针，所以可以直接传递，而不用取地址后传递指针。
+（注：若函数需改变 slice 的长度，则仍需要取地址传递指针）
+ */
 func test(a *int) {
-	fmt.Println(a)  //0xc000010100
-	fmt.Println(*a) //打印出内存地址的值
+	fmt.Println(a)  //内存地址
+	fmt.Println(*a) //打印出内存地址上的值
 }
