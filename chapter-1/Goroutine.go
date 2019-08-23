@@ -111,7 +111,7 @@ func main() {
 			fmt.Println("from channel1")
 			goto Foo
 		//超时处理
-		case <-time.After(5 * time.Second):
+		case <-time.After(5 * time.Second)://After()函数接受一个时长d，然后它After()等待d时长，等待时间到后，将等待完成时所处时间点写入到channel中并返回这个只读channel。
 			timeOut <- true
 			break
 		//如果case都不满足,则执行default
