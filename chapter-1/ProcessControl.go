@@ -5,6 +5,18 @@ package main
 
 import "fmt"
 
+//type testInt func(int) bool // 声明了一个函数类型 可以用来约束函数的参数和返回类型
+
+/**
+定义模块初始化函数
+*/
+func init() {
+	fmt.Println("package init")
+}
+
+/**
+模块主函数
+*/
 func main() {
 
 	// if
@@ -80,7 +92,27 @@ func main() {
 	bar(4, 3, 2, 1)
 
 	num := 1
-	test(&num)
+	test(&num) // 传递指针到函数
+
+	// defer 延迟执行 defer定义函数是栈结构 先进后出
+	/**
+	defer 后指定的函数会在函数退出前调用。
+	*/
+	/*for i := 0; i < 5; i++ {
+		defer fmt.Println(i) // 4 3 2 1 0
+	}*/
+
+	// 处理错误
+	defer func() {
+		/**
+		recover仅在延迟函数中有效,正常情况下recover()返回nil,在panic抛出致命错误的时候,会获取抛出的错误信息。
+		*/
+		if x := recover(); x != nil {
+			fmt.Println(x)
+		}
+	}()
+
+	panic("error info")
 }
 
 func getNum() int {
@@ -115,7 +147,7 @@ func bar(args ...int) {
 /**
 Go 语言中 channel，slice，map 这三种类型的实现机制类似指针，所以可以直接传递，而不用取地址后传递指针。
 （注：若函数需改变 slice 的长度，则仍需要取地址传递指针）
- */
+*/
 func test(a *int) {
 	fmt.Println(a)  //内存地址
 	fmt.Println(*a) //打印出内存地址上的值
