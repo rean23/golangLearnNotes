@@ -7,7 +7,7 @@
 
 /.idea/
 
-/vendor/
+vendor/
 !/vendor/vendor.json#
 
 
